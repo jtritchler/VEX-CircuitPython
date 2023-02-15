@@ -14,12 +14,12 @@ class Switch():
         '''
         Initialize the Switch Object
         '''
-        self.switch = DigitalInOut(switch_pin)
-        self.switch.direction = Direction.INPUT
-        self.switch.pull = Pull.UP
+        self._switch = DigitalInOut(switch_pin)
+        self._switch.direction = Direction.INPUT
+        self._switch.pull = Pull.UP
 
     def pressed(self) -> bool:
-        if not self.switch.value:
+        if not self._switch.value:
             return True
         else:
             return False

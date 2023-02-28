@@ -201,4 +201,55 @@ class Ultrasonic():
         :return: Integer distance measured by the sensor in mm.
         :rtype: int
         '''
-        return int(round(self._sonar.distance * 10))
+        # Try to read the distance from the sensor
+        try:
+            dist = self._sonar.distance * 10
+        # Set the distance to -1 if the sensor cannot be read
+        except RuntimeError:
+            dist = -1
+        # Return the distance in mm
+        return int(round(dist))
+
+class LineTracker():
+    '''Reads the input from a VEX Line Tracker.
+
+    :param track_pin: Input to read the line tracker value.
+    :type track_pin: class:`microcontroller.Pin`
+    '''
+
+    def __init__(self, track_pin) -> None:
+        '''Constructor method.
+        '''
+        # Initialize the analog input for the potentiometer
+        self._line_tracker = AnalogIn(track_pin)
+
+    def value(self) -> int:
+        '''Returns the value of the line tracker between 0 and 65535 inclusive
+        (16-bit).
+
+        :return: Integer value between 0 and 65535 inclusive.
+        :rtype: int
+        '''
+        return self._line_tracker.value
+
+class LightSensor():
+    '''Reads the input from a VEX Light Sensor.
+
+    :param light_pin: Input to read the light sensor value.
+    :type light_pin: class:`microcontroller.Pin`
+    '''
+
+    def __init__(self, light_pin) -> None:
+        '''Constructor method.
+        '''
+        # Initialize the analog input for the potentiometer
+        self._light = AnalogIn(light_pin)
+
+    def value(self) -> int:
+        '''Returns the value of the light sensor between 0 and 65535 inclusive
+        (16-bit).
+
+        :return: Integer value between 0 and 65535 inclusive.
+        :rtype: int
+        '''
+        return self._light.value
